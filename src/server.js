@@ -114,7 +114,7 @@ app.get('/health', (req, res) => res.json({ ok: true }));
  * /auth/login:
  *   post:
  *     tags: [Auth]
- *     summary: Login de demo (sin BD) para obtener JWT
+ *     summary: Login
  *     requestBody:
  *       required: true
  *       content:
