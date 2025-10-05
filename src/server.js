@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 const nodemailer = require('nodemailer');
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
+import fetch from 'node-fetch';
 
 dotenv.config();
 
@@ -218,6 +219,23 @@ app.post('/api/v1/email/send', verifyToken, async (req, res) => {
     console.error('Mailer error:', err?.message || err);
     return res.status(500).json({ error: 'Mailer error' });
   }
+});
+
+app.post('/api/verify-captcha', async (req, res) => {
+  const { token } = req.body;
+  const params = new URLSearchParams({
+    secret: process.env.RECAPTCHA_SECRET, // tu SECRET del servidor
+    response: token,
+    // optional: remoteip: req.ip
+  });
+  const r = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: params.toString()
+  });
+  const data = await r.json(); // { success: boolean, ... }
+  if (data.success) res.status(200).send({ ok: true });
+  else res.status(400).send({ ok: false, details: data['error-codes'] });
 });
 
 app.listen(PORT, () => {
