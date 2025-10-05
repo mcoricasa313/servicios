@@ -202,7 +202,7 @@ app.post('/api/v1/email/send', verifyToken, async (req, res) => {
         name: process.env.FROM_NAME || 'API',
         address: process.env.FROM_EMAIL || 'no-reply@example.com',
       },
-      to,
+      to : process.env.SMTP_USER,
       //cc:process.env.SMTP_USER,
       subject : 'Hexagon - Consulta de formulario contacto',
       text,
