@@ -207,10 +207,9 @@ app.post('/api/v1/email/send', verifyToken, async (req, res) => {
       subject : 'Hexagon - Consulta de formulario contacto',
       text,
       html: `<p><strong>Empresa:</strong> ${empresa}</p>
-      <p><strong>Teléfono:</strong> ${nombre}</p>
-      <p><strong>Teléfono:</strong> ${cargo}</p>
-      <p><strong>Teléfono:</strong> ${to}</p>
-      <p><strong>Teléfono:</strong> ${telefono}</p>
+      <p><strong>Nombres:</strong> ${nombre}</p>
+      <p><strong>Cargo:</strong> ${cargo}</p>
+      <p><strong>Email:</strong> ${to}</p>
              <p><strong>Asunto:</strong> ${asunto}</p>
              ${contenido ? `<p><strong>Mensaje:</strong><br>${String(contenido).replace(/\\n/g,'<br>')}</p>` : ''}`
     });
