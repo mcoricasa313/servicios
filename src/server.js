@@ -219,7 +219,7 @@ app.post('/api/v1/email/send', verifyToken, async (req, res) => {
     `Cargo: ${cargo}`,
     `Correo: ${to}`,
     `Asunto: ${asunto}`,
-    `Teléfono: ${telefono}`,
+    // `Teléfono: ${telefono}`,
     '',
     'Mensaje:',
     contenido,
